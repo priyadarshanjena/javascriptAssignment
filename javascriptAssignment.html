@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+</head>
+<body onload="createElements()">
+	<form action="" name="myForm">
+		First Name:<br>
+	<input type="text" id="txtFname"><br>
+	Last Name:<br>
+	<input type="text" id="txtLname"><br>
+	Email:<br>
+	<input type="email" id="email"><br>
+	Contact Number:<br>
+	<input type="text" id="txtCntNb"><br>
+	Address:<br>
+	<textarea></textarea><br>
+	Username:<br>
+	<input type="text" id="txt_uname"><br>
+	Password:<br>
+	<input type="password" id="pwd"><br>
+	Gender:<br>
+	<input type="radio" name="rbgender" value="male">Male<br>
+	<input type="radio" name="rbgender" value="female">Female<br>
+	Qualification:<br>
+	<select id="cmbqual">
+		<option value="null">--select--</option>
+	</select><br>
+	Experience:<br>
+	<select id="cmbExp">
+		<option value="null">--select</option>
+	</select><br>
+	Coding Language:<br>
+	<div id="checkbox"></div>
+	
+
+	<input type="submit" id="btnsub"  value="submit">
+
+		
+	</form>
+	<script type="text/javascript" language="javascript">
+		var qualification=["B.sc(ITM)","BCA","CS","MCA","BTECH"];
+		var experiences=[0,1,2,3,4,5];
+		var codingLanguages=[
+		{
+			LanguageName:"C/C++",
+			isEnabled:false
+
+		},
+		{
+			LanguageName:"JAVA",
+			isEnabled:true
+		},
+		{
+			LanguageName:"C#",
+			isEnabled:true
+		},
+		{
+			LanguageName:"PHP",
+			isEnabled:false
+		},
+		{
+			LanguageName:"PYTHON",
+			isEnabled:false
+		}
+		];
+		document.getElementById("btnsub").addEventListener("click",
+			function(obj){
+			var employee={};
+			obj.preventDefault();
+			employee.txtFname=document.getElementById("txtFname").value;
+			employee.txtLname=document.getElementById("txtLname").value;
+			employee.email=document.getElementById("email").value;
+			employee.txtCntNb=document.getElementById("txtCntNb").value;
+			employee.txt_uname=document.getElementById("txt_uname").value;
+			employee.pwd=document.getElementById("pwd").value;
+			employee.rbgender=document.myForm.rbgender.value;
+			employee.cmbqual=document.getElementById("cmbqual").value;
+			employee.cmbExp=document.getElementById("cmbExp").value;
+			employee.codingLanguages=document.querySelectorAll("#lang:checked");
+			console.log(employee.txtFname);
+			console.log(employee.txtLname);
+			console.log(employee.email);
+			console.log(employee.txtCntNb);
+			console.log(employee.txt_uname);
+			console.log(employee.pwd);
+			console.log(employee.rbgender);
+			console.log(employee.cmbqual);
+			console.log(employee.cmbExp);
+			
+
+			for(var i=0;i<employee.codingLanguages.length;i++)			
+				console.log(employee.codingLanguages[i].value);
+			
+			})
+
+
+		 function createElements(){
+            var qualifications = document.getElementById("cmbqual");
+            for(let i = 0; i<qualification.length;i++){
+                let el = document.createElement("option");
+                el.value = qualification[i];
+                el.innerText = qualification[i];
+                qualifications.appendChild(el);
+            }
+
+            var experience = document.getElementById("cmbExp");
+            for(let i = 0; i<experiences.length;i++){
+                let el = document.createElement("option");
+                el.value = experiences[i];
+                el.innerText = experiences[i];
+                experience.appendChild(el);
+            }
+
+            var checkDiv = document.getElementById("checkbox");
+            for(let i = 0; i<codingLanguages.length;i++){
+                let el = document.createElement("input");
+                el.type = "checkbox";
+                el.id="lang";
+                el.value = codingLanguages[i].LanguageName;
+                el.checked = codingLanguages[i].isEnabled;
+
+                let span = document.createElement("span");
+                span.appendChild(document.createTextNode(codingLanguages[i].LanguageName));
+                checkDiv.appendChild(el);
+                checkDiv.appendChild(span);
+				checkDiv.appendChild(document.createElement("br"));
+            }
+        }
+
+	</script>
+
+</body>
+</html>
